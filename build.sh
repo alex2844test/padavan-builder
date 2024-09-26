@@ -305,6 +305,7 @@ if [[ -z "${container}" ]] && [[ "${PROJECT:-}" != 'padavan-ng' ]] && [[ "${BUIL
 fi
 
 echo "Cloning or updating Padavan repository...";
+cexec git config --global http.version HTTP/1.1; # https://github.com/alex2844test/padavan-builder/actions/runs/11049634932
 if [[ ! -d "padavan-ng" ]]; then
 	if [[ "${PADAVAN_COMMIT:-HEAD}" == "HEAD" ]]; then
 		cexec git clone --depth 1 -b "${PADAVAN_BRANCH:-master}" "${PADAVAN_REPO}";
@@ -338,6 +339,7 @@ if [[ -n ${PADAVAN_THEMES:-} ]] && [[ -n ${PADAVAN_THEMES_REPO:-} ]]; then
 		cexec cp -r "themes/${theme}-theme" padavan-ng/trunk/user/www/n56u_ribbon_fixed;
 	done
 fi
+cexec git config --global http.version HTTP/2;
 
 echo "Configuring build...";
 if [[ "${PADAVAN_CONFIG:-build.config}" != "build.config" ]]; then
